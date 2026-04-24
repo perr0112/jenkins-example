@@ -25,5 +25,12 @@ pipeline {
 
             }
         }
+
+        // Build docker de cette image en utilisant le daemon de l'hôte
+        stage("Build - Docker") {
+            steps {
+                sh "docker build -t api-app ."
+            }
+        }
     }
 }
