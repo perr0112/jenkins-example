@@ -8,15 +8,21 @@ pipeline {
             }
         }
         // Lancer le lint + les tests
-        stage("lint") {
-            steps {
-                sh 'npm run lint'
-            }
-        }
+        stage("Qualité") {
+            parallel {
 
-        stage("tests") {
-            steps {
-                sh 'npm run test'
+                stage("Lint") {
+                    steps {
+                        sh "npm run lint"
+                    }
+                }
+
+                stage("Tests") {
+                    steps {
+                        sh "npm run test:coverage"
+                    }
+                }
+
             }
         }
     }
